@@ -1,1 +1,4 @@
-Olá meu nome é Alex
+
+git config --global user.email "projetosemaqueteseletronicas@gmail.com"
+git config --global user.name "Alex Silva"
+Olá eu sou uma nova linha de comandos
