@@ -3,23 +3,23 @@ name: Criar APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Baixar o código do repositório
+      uses: actions/checkout@v4
 
-    - name: Build com Buildozer
-      uses: kooritea/buildozer-action@v1
+    - name: Compilar com Buildozer Action (Versão Oficial)
+      uses: Aaronepower/buildozer-action@v1
       with:
         command: buildozer android debug
         repository_root: .
 
-    - name: Upload do APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: Meu-Aplicativo-APK
-        path: bin/*.apk
+    - name: Enviar o APK pronto para download
+        uses: actions/upload-artifact@v4
+        with:
+          name: Meu-Aplicativo-APK
+          path: bin/*.apk
