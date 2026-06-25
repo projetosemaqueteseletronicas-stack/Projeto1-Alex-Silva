@@ -1,22 +1,25 @@
-name: Build APK
-on: [push]
+name: Criar APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Get Buildozer Docker
-        run: |
-          docker pull kivy/buildozer:latest
+    - name: Build com Buildozer
+      uses: ArtemShatalov/buildozer-action@v1.3.0
+      with:
+        command: buildozer android debug
+        repository_root: .
 
-      - name: Build with Buildozer
-        run: |
-          docker run --rm -v ${{ github.workspace }}:/home/user/hostcwd kivy/buildozer android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: package
-          path: bin/*.apk
+    - name: Upload do APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: Meu-Aplicativo-APK
+        path: bin/*.apk
