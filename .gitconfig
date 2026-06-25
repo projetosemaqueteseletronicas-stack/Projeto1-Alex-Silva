@@ -1,3 +1,5 @@
 [user]
-	email = https://github.com/projetosemaqueteseletronicas-stack/meu-app-python
+	email = alex@exemplo.com
 	name = Alex Silva
+[safe]
+	directory = buildozer.spec
