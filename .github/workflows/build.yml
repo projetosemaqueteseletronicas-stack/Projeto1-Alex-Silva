@@ -1,3 +1,9 @@
+
+
+
+
+
+
 name: Criar APK
 
 on:
@@ -14,6 +20,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Compilar com Buildozer Action (Versão Oficial)
+uses: ArcturusZhang/buildozer-action@v1
       uses: Aaronepower/buildozer-action@v1
       with:
         command: buildozer android debug
@@ -24,3 +31,4 @@ jobs:
       with:
         name: Meu-Aplicativo-APK
         path: bin/*.apk
+
