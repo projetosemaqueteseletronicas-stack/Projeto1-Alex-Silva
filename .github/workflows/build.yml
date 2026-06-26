@@ -4,6 +4,7 @@
 
 
 
+
 name: Criar APK
 
 on:
@@ -25,10 +26,16 @@ uses: ArcturusZhang/buildozer-action@v1
       with:
         command: buildozer android debug
         repository_root: .
+nano .github/workflows/build.yml
 
+exit
     - name: Enviar o APK pronto para download
       uses: actions/upload-artifact@v4
       with:
         name: Meu-Aplicativo-APK
         path: bin/*.apk
+
+clear
+
+
 
