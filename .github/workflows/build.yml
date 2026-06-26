@@ -3,6 +3,7 @@ name: Criar APK
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
         repository_root: .
 
     - name: Enviar o APK pronto para download
-        uses: actions/upload-artifact@v4
-        with:
-          name: Meu-Aplicativo-APK
-          path: bin/*.apk
+      uses: actions/upload-artifact@v4
+      with:
+        name: Meu-Aplicativo-APK
+        path: bin/*.apk
