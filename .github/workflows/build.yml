@@ -27,12 +27,7 @@ jobs:
     - name: Instalar Dependências Completas do Linux
       run: |
         sudo apt update
-        sudo apt install -y build-essential ccache git libffi-dev libssl-dev libtinfo5 \
-        autoconf automake libtool pkg-config zlib1g-dev libasound2-dev libgstreamer1.0-dev \
-        gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
-        gstreamer1.0-plugins-ugly gstreamer1.0-libav libgstrtspserver-1.0-dev libgl1-mesa-dev \
-        libgles2-mesa-dev libmtdev-dev xclip xsel libsdl2-dev libsdl2-image-dev \
-        libsdl2-mixer-dev libsdl2-ttf-dev
+        sudo apt install -y build-essential ccache git libffi-dev libssl-dev libtinfo5 autoconf automake libtool pkg-config zlib1g-dev libasound2-dev
 
     - name: Instalar Buildozer e Cython
       run: |
