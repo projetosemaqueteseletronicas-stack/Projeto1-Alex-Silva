@@ -1,4 +1,4 @@
-name: Criar APK
+name: Pipeline de Compilacao Oficial Kivy
 
 on:
   push:
@@ -7,39 +7,32 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Baixar o código do repositório
+    - name: Checkout do Repositorio
       uses: actions/checkout@v4
 
-    - name: Configurar Python
-      uses: actions/setup-python@v5
+    - name: Validacao e Higienizacao do Arquivo Spec
+      run: |
+        python3 -c "
+        with open('buildozer.spec', 'r') as f:
+            linhas = f.readlines()
+        
+        chaves_remover = ['android.sdk', 'android.ndk', 'android.ndk_path', 'android.sdk_path']
+        linhas_filtradas = [l for l in linhas if not any(l.strip().startswith(k) and '=' in l for k in chaves_remover)]
+        
+        with open('buildozer.spec', 'w') as f:
+            f.writelines(linhas_filtradas)
+        "
+
+    - name: Execucao do Build via Docker Oficial Kivy
+      uses: kivy/buildozer-action@v1
       with:
-        python-version: '3.10'
+        command: buildozer android debug
 
-    - name: Configurar Java JDK 17
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    - name: Instalar Dependências Completas do Linux
-      run: |
-        sudo apt update
-        sudo apt install -y build-essential ccache git libffi-dev libssl-dev libtinfo5 autoconf automake libtool pkg-config zlib1g-dev libasound2-dev
-
-    - name: Instalar Buildozer e Cython
-      run: |
-        pip install --upgrade pip
-        pip install buildozer cython virtualenv
-
-    - name: Compilar APK com Buildozer
-      run: |
-        yes | buildozer android debug
-
-    - name: Enviar o APK pronto para download
+    - name: Armazenamento do Artefato APK Final
       uses: actions/upload-artifact@v4
       with:
-        name: Meu-Aplicativo-APK
+        name: pacote-android-estavel
         path: bin/*.apk
