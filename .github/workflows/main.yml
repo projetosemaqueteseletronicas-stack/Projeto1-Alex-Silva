@@ -1,0 +1,20 @@
+[app]
+title = Meu App Python
+package.name = meuapppython
+package.domain = org.projetostack
+source.dir = .
+source.include_exts = py,png,jpg,kv,atlas
+version = 0.1
+requirements = python3,kivy
+orientation = portrait
+fullscreen = 1
+
+# Diretivas de Escalonamento de API para Android Moderno
+android.api = 33
+android.minapi = 21
+android.ndk_api = 21
+android.accept_sdk_license = True
+warn_on_root = 0
+p4a.branch = master
+android.archs = arm64-v8a, armeabi-v7a
+android.allow_backup = True
